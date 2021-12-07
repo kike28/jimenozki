@@ -1,0 +1,22 @@
+#!/bin/bash
+# Demyx
+# https://demyx.sh
+set -euo pipefail
+
+# Generate config
+sudo -E jimenozki-config
+
+# Install WordPress
+jimenozki-install
+
+# OpenLiteSpeed admin
+sudo -E jimenozki-admin
+
+# OpenLiteSpeed htpasswd
+sudo -E jimenozki-htpasswd
+
+# Start OLS
+sudo -E jimenozki-lsws
+
+# Keeps container alive
+tail -f "$JIMENOZKI_LOG"/ols.access.log "$JIMENOZKI_LOG"/ols.error.log

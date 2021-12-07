@@ -1,0 +1,24 @@
+#!/bin/bash
+# Demyx
+# https://demyx.sh
+set -euo pipefail
+
+# Support for old variables
+#[[ -n "${OPENLITESPEED_ADMIN:-}" ]] && DEMYX_ADMIN="$OPENLITESPEED_ADMIN"
+#[[ -n "${OPENLITESPEED_ADMIN_PREFIX:-}" ]] && JIMENOZKI_ADMIN_PREFIX="$OPENLITESPEED_ADMIN_PREFIX"
+#[[ -n "${OPENLITESPEED_ADMIN_PASSWORD:-}" ]] && DEMYX_ADMIN_PASSWORD="$OPENLITESPEED_ADMIN_PASSWORD"
+#[[ -n "${OPENLITESPEED_ADMIN_USERNAME:-}" ]] && JIMENOZKI_ADMIN_USERNAME="$OPENLITESPEED_ADMIN_USERNAME"
+
+# Disable prefix if this variable is false
+if [[ "$JIMENOZKI_ADMIN_PREFIX" = true ]]; then
+    find /usr/local/lsws/admin/html/. -type f -print0 | xargs -0 /bin/sed -i "s|/login.php|${JIMENOZKI_ADMIN}/login.php|g"
+    find /usr/local/lsws/admin/html/. -type f -print0 | xargs -0 /bin/sed -i "s|/index.php|${JIMENOZKI_ADMIN}/index.php|g"
+fi
+
+# Replace default OLS admin login
+# Default username: jimenozki
+# Default password: jimenozki
+JIMENOZKI_ADMIN_PASSWORD_ENCRYPTED="$(jimenozki-encrypt "$JIMENOZKI_ADMIN_PASSWORD")"
+echo "${JIMENOZKI_ADMIN_USERNAME}:${JIMENOZKI_ADMIN_PASSWORD_ENCRYPTED}" > /usr/local/lsws/admin/conf/htpasswd
+echo lsadm:lsadm /usr/local/lsws/admin/conf/htpasswd
+echo 600 /usr/local/lsws/admin/conf/htpasswd
