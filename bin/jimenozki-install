@@ -1,6 +1,6 @@
 #!/bin/bash
-# Demyx
-# https://demyx.sh
+# Jimenozki
+# https://
 set -euo pipefail
 
 
@@ -10,7 +10,4 @@ if [[ ! -d "$JIMENOZKI"/wp-content ]]; then
         wp core download --locale=es_ES --force;
 fi
 cd /jimenozki
-wp config create --dbhost=$JIMENOZKI_DB_HOST --dbname=$JIMENOZKI_DB_NAME --dbuser=$JIMENOZKI_DB_USER --dbpass=$JIMENOZKI_DB_PASSWORD --dbprefix=$JIMENOZKI_DB_PREFIX --dbcharset=$JIMENOZKI_DB_CHARSET --locale=$JIMENOZKI_DB_LOCALE  --skip-check --force
-
-
-  
+wp config create --dbhost=$JIMENOZKI_DB_HOST --dbname=$JIMENOZKI_DB_NAME --allow-root --dbuser=$JIMENOZKI_DB_USER --dbpass=$JIMENOZKI_DB_PASSWORD --dbprefix=$JIMENOZKI_DB_PREFIX --dbcharset=$JIMENOZKI_DB_CHARSET --locale=$JIMENOZKI_DB_LOCALE  --skip-check --force

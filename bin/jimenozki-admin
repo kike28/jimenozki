@@ -1,6 +1,6 @@
 #!/bin/bash
-# Demyx
-# https://demyx.sh
+# Jimenozki
+# http:
 set -euo pipefail
 
 # Support for old variables
@@ -10,10 +10,10 @@ set -euo pipefail
 #[[ -n "${OPENLITESPEED_ADMIN_USERNAME:-}" ]] && JIMENOZKI_ADMIN_USERNAME="$OPENLITESPEED_ADMIN_USERNAME"
 
 # Disable prefix if this variable is false
-if [[ "$JIMENOZKI_ADMIN_PREFIX" = true ]]; then
-    find /usr/local/lsws/admin/html/. -type f -print0 | xargs -0 /bin/sed -i "s|/login.php|${JIMENOZKI_ADMIN}/login.php|g"
-    find /usr/local/lsws/admin/html/. -type f -print0 | xargs -0 /bin/sed -i "s|/index.php|${JIMENOZKI_ADMIN}/index.php|g"
-fi
+#if [[ "$JIMENOZKI_ADMIN_PREFIX" = true ]]; then
+#    find /usr/local/lsws/admin/html/. -type f -print0 | xargs -0 /bin/sed -i "s|/login.php|${JIMENOZKI_ADMIN}/login.php|g"
+#    find /usr/local/lsws/admin/html/. -type f -print0 | xargs -0 /bin/sed -i "s|/index.php|${JIMENOZKI_ADMIN}/index.php|g"
+#fi
 
 # Replace default OLS admin login
 # Default username: jimenozki
